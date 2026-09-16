@@ -3,7 +3,7 @@ pip: 46
 title: Supporting Ed25519 Curve
 description: Add Ed25519 (EdDSA) support including encoding, addresses, and HD derivation
 author: Pactus Development Team <info@pactus.org>
-status: Draft
+status: Replaced
 category: Core
 discussion-no: 266
 created: 2025-10-20
@@ -50,7 +50,7 @@ We define signature type `3` for Ed25519 key pairs.
 
 The public key is 32 bytes in the standard Ed25519 compressed form:
 it encodes the y-coordinate, and the most significant bit of the final octet encodes
-the sign bit of the x-coordinate. See RFC 8032 for details.
+the sign bit of the x-coordinate. See RFC 8032, Section 5.1.5, for details.
 
 Public keys are encoded with Bech32m using a distinct HRP.
 
@@ -60,10 +60,11 @@ public_key_string = bech32m(HRP="public", TYPE="3", DATA="<compressed_public_key
 
 ### Private Key
 
-The Ed25519 private key is a 32-byte seed. It is encoded with Bech32m using a distinct HRP.
+The Ed25519 private key is a random 32-byte.
+It is encoded with Bech32m using a distinct HRP.
 
 ```text
-private_key_string = bech32m(HRP="SECRET", TYPE="3", DATA="<private_key_seed>")
+private_key_string = bech32m(HRP="SECRET", TYPE="3", DATA="<private_key_data>")
 ```
 
 ### Derivation PATH

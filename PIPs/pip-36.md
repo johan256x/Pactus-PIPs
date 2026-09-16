@@ -50,13 +50,13 @@ where multiple clients may need updates about specific events like new blocks or
 Messages in ZeroMQ, following the Pactus message format,
 begin with a 2-byte Topic ID, followed by topic-specific data and a 4-byte sequence number,
 The sequence number, which acts as an incremental counter for each Topic ID and
-is encoded in little-endian format, helps detect lost messages by tracking the message count.
+is encoded in big-endian format, helps detect lost messages by tracking the message count.
 
 ![Pactus zeroMQ Message Format](../assets/pip-36/pactus_zeromq.png)
 
 #### Topic ID
 
-Topic ID is a fixed lenght two bytes and defined as below:
+Topic ID is a fixed length two bytes and defined as below:
 
 1. **0x0001**: Block Info
 2. **0x0002**: Transaction Info
@@ -85,7 +85,8 @@ The Transaction Info topic data is structured as:
 
 The block number indicates the block in which the transaction is confirmed.
 If the block number is set to `0`, the transaction remains unconfirmed.
-This allows the service to notify applications when transactions enter the transaction pool, with room for future expansion.
+This allows the service to notify applications when transactions enter the transaction pool,
+with room for future expansion.
 
 #### Raw Block Header
 
